@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:key="switch_grid"
+        android:title="Отображать пользователей сеткой"
+        android:summaryOff="выкл."
+        android:summaryOn="вкл."/>
+
+    <ListPreference
+        android:key="number_of_columns"
+        android:summary="%s"
+        android:entries="@array/numbers_of_columns"
+        android:entryValues="@array/numbers_of_columns"
+        app:title="Количество колонок"/>
+
+
+</PreferenceScreen>

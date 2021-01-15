@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e224f4efa49978c47ab8a183d811b83f, type: 3}
+  m_Name: Blue_Shapes
+  m_EditorClassIdentifier: 
+  shapes:
+  - {fileID: 3536117631511165724, guid: 07659e6d1cc67634cbdda497b6e1c9f1, type: 3}
+  - {fileID: 1510855335512105803, guid: 016b3f9a8561d3747a6dff52b5b14108, type: 3}
+  - {fileID: 1051613576960950782, guid: 6cca6417b66410846b0c6b9498644256, type: 3}
+  - {fileID: 3046561399377493626, guid: d5f348283be1deb4081dab14cab11fd2, type: 3}
+  - {fileID: 95109701585164605, guid: 33bab9178955e5a4b826d76dc62fe924, type: 3}

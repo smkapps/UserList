@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd988e28c9a1643438901047e744cbe0, type: 3}
+  m_Name: DreamSpriteWhite
+  m_EditorClassIdentifier: 
+  dreamSprites:
+  - {fileID: 21300000, guid: a375cd186ad9ed2428db0660f36ab436, type: 3}
+  - {fileID: 21300000, guid: 43eb2deb7cb879a42b8e535c79a1375a, type: 3}
+  - {fileID: 21300000, guid: 71de854a67ed4934aa91831eb63d8588, type: 3}
+  - {fileID: 21300000, guid: 4a00ae46e04526744bfe8277b59e06a8, type: 3}
+  - {fileID: 21300000, guid: fc9c972705d11004b9e62c271330be29, type: 3}
+  - {fileID: 21300000, guid: 8c686d53938334342b7667fa11624c5e, type: 3}
+  - {fileID: 21300000, guid: 90a77358b0f2e43488da874dd207f203, type: 3}
+  - {fileID: 21300000, guid: b544f060a542d024c84fe9d5812bd134, type: 3}
+  - {fileID: 21300000, guid: 0cdd492c30aac2f40b26cae8a9311527, type: 3}
+  - {fileID: 21300000, guid: 1b47fdd114bf3ad478f34598f5e026c8, type: 3}
+  - {fileID: 21300000, guid: a11c0bd682231724e98897ee6a233ca3, type: 3}
+  - {fileID: 21300000, guid: 28bc8b8c0263b3a4f87377ee4af621b3, type: 3}
+  - {fileID: 21300000, guid: 5d3beede780c3f04e8bf148b1f8cdbec, type: 3}
+  - {fileID: 21300000, guid: 761eb4846b17d7541a951ddbccde023b, type: 3}
+  - {fileID: 21300000, guid: 23d865300679b5541a5e01e6e960ccff, type: 3}

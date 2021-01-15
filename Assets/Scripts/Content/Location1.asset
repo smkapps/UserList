@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b47cf6218b3f40b4e976e8d35bd9a848, type: 3}
+  m_Name: Location1
+  m_EditorClassIdentifier: 
+  background: {fileID: 21300000, guid: c188ddf5131d6164b8f48c06c1089049, type: 3}
+  shapesList: {fileID: 11400000, guid: b25edfbe266321549af3e91f2bcec208, type: 2}
+  dreamsSpritesList: {fileID: 11400000, guid: 3b4bc935b672ace47b1e28965de2960a, type: 2}
+  circleSkinWithShapes: {fileID: 21300000, guid: 9bee551294304f343af4a28202e1edf0,
+    type: 3}
+  circleSkin: {fileID: 21300000, guid: 9923963a1208d02479c84cf63c08c6be, type: 3}
+  minutesOnPreviousStageToUnlock: 0.5

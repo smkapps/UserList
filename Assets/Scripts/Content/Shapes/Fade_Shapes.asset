@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e224f4efa49978c47ab8a183d811b83f, type: 3}
+  m_Name: Fade_Shapes
+  m_EditorClassIdentifier: 
+  shapes:
+  - {fileID: 2529919250906707275, guid: 4e7d365c0b6dbed4bbaafea88f64d67d, type: 3}
+  - {fileID: 8257036561561270220, guid: 0ae74e3ac7270904abd32e09d553e9ee, type: 3}
+  - {fileID: 95951380101900240, guid: 328edaae4cc012240a0f373eb0e81af6, type: 3}
+  - {fileID: 1078460387604556446, guid: 29e7f682482f75a41b66d3cae2930417, type: 3}

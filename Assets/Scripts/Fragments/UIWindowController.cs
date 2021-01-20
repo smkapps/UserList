@@ -8,7 +8,7 @@ using System;
 public class UIWindowController : AUIFragmentController
 {
     [SerializeField] private Image darkerImage;
-    private const float DARKER_ALPHA = 0.86f;
+    private const float DARKER_ALPHA = 0.50f;
 
     [SerializeField] private UIFragment currentWindow;
     public UIFragment CurrentWindow => currentWindow;
@@ -87,6 +87,7 @@ public class UIWindowController : AUIFragmentController
             darkerImage.DOFade(0, currentWindow.TransitionAnimation == null ? 0 : layerDefaultAnimation.Duration).SetEase(Ease.InExpo).OnComplete(() => {
                 darkerImage.gameObject.SetActive(false);
                 isHiding = false;
+                currentWindow = null;
                 if (windowsQueue.Count > 0)
                 {
                     windowsQueue.First.Value.Invoke();
@@ -95,7 +96,7 @@ public class UIWindowController : AUIFragmentController
                    
             });
             WindowClosed?.Invoke();
-            currentWindow = null;
+            
         }
         else
         {

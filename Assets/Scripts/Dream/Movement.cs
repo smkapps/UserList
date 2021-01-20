@@ -13,7 +13,7 @@ public class Movement : MonoBehaviour
     public float movementTargetAngle;
     public float currentAngle;
 
-
+    private bool paused => UIControllerFacade.Instance.AnyWindowOpen;
     private void OnEnable()
     {
         changedByPlayer = false;
@@ -25,6 +25,7 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (paused) return;
         MoveInCurrentDirection();
     }
 

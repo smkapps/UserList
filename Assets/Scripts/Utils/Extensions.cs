@@ -84,4 +84,21 @@ public static class Extensions
         renderer.color = renderer.color.WithAlpha(targetAlpha);
         onComplete?.Invoke();
     }
+
+    public static string TimeText(this TimeSpan timespan)
+    {
+        //if (timespan.TotalHours > 0) return string.Format(@"{0:hh\:mm\:ss}", timespan);
+        if ((int)timespan.TotalHours > 0) return (int)timespan.TotalHours + timespan.ToString(@"\:mm\:ss");
+        if (timespan.Minutes > 0) return string.Format(@"{0:mm\:ss}", timespan);
+        return string.Format(@"{0:ss}", timespan);
+    }
+
+    public static string TimeTextWithMinutes(this TimeSpan timespan)
+    {
+        if ((int)timespan.TotalHours > 0) return (int)timespan.TotalHours + timespan.ToString(@"\:mm\:ss");
+        //if (timespan.TotalHours > 0) return string.Format(@"{0:hh\:mm\:ss}", timespan);
+         return string.Format(@"{0:mm\:ss}", timespan);
+
+    }
+
 }

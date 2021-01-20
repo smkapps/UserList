@@ -4,20 +4,30 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    private int targetCount = 4;
+    private const int SPAWN_INTERVAL = 3;
     [SerializeField] private int currentCount = 0;
+    private int targetCount = 3;    
     private Camera cameraMain;
+    private bool paused => UIControllerFacade.Instance.AnyWindowOpen;
+    private WaitForSeconds waitSpawnInterval = new WaitForSeconds(SPAWN_INTERVAL);
+    private int dreamsLayerMask;
 
     private void Awake()
     {
+        dreamsLayerMask = LayerMask.GetMask(new string[] { "Default" });
         cameraMain = Camera.main;
-
-        InvokeRepeating(nameof(CreateDreams), 1, 5);
+        StartCoroutine(CreateDreamsEndless());
     }
-
-    private void CreateDreams()
+   
+    private IEnumerator CreateDreamsEndless()
     {
-        CreateNDreams(targetCount);
+        yield return new WaitForSeconds(1);
+        while (true)
+        {
+            while (paused) yield return null;
+            CreateNDreams(targetCount);
+            yield return waitSpawnInterval;
+        }
     }
 
     private void CreateNDreams(int count)
@@ -41,7 +51,7 @@ public class Spawner : MonoBehaviour
             return;
         }
         
-        GameObject dream = ContentProvider.Instance.GetRandomDreamPrefab(position);
+        GameObject dream = ContentProvider.Instance.GetCurrentLocationRandomDreamPrefab(position);
         dream.transform.position = position;
         dream.transform.localScale = Vector2.one * Random.Range(0.9f, 1.4f);
         Sprite definitionSprite = ContentProvider.Instance.GetRandomDreamDefinitionSprite();
@@ -63,7 +73,7 @@ public class Spawner : MonoBehaviour
 
         Vector2 perimeterPoint = RandomPerimeterPointToVector2(Screen.width, Screen.height);
         Vector2 position = cameraMain.ScreenToWorldPoint(new Vector3(perimeterPoint.x, perimeterPoint.y, 0));
-        if (Physics2D.OverlapCircleAll(position, 2, LayerMask.GetMask(new string[] { "Default" })).Length > 0) return GetRandomPointOnPerimeter();
+        if (Physics2D.OverlapCircleAll(position, 2, dreamsLayerMask).Length > 0) return GetRandomPointOnPerimeter();
         return position;
     }
 

@@ -5,28 +5,30 @@ using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
-    public int stressValue;
-    public int stressMaxValue = 10;
+    private Animator animator;
 
-    public static event Action<StressInfo> Stressed;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    public static event Action Stressed;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        stressValue++;
         collision.gameObject.SetActive(false);
-        Stressed?.Invoke(new StressInfo(stressValue, 10));
+        animator?.SetTrigger("off");
+        Stressed?.Invoke();
+
     }
+
+    //private void GetStressHit()
+    //{
+    //    stressValue++;       
+    //    Stressed?.Invoke(new StressInfo(stressValue, stressMaxValue));
+       
+    //    if (stressValue == stressMaxValue) UIControllerFacade.Instance.ShowUIWindow(UIFragmentName.StressPeak);
+    //}
 }
 
-
-public struct StressInfo
-{
-    public int currentValue;
-    public int maxValue;
-
-    public StressInfo(int currentValue, int maxValue)
-    {
-        this.currentValue = currentValue;
-        this.maxValue = maxValue;
-    }
-}

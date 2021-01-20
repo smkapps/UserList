@@ -1,0 +1,118 @@
+{
+  "project_info": {
+    "project_number": "21274831280",
+    "project_id": "protos-34356",
+    "storage_bucket": "protos-34356.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21274831280:android:e729436b7fb0578a358e75",
+        "android_client_info": {
+          "package_name": "games.urmobi.bugs.antistress"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21274831280-3s08snkmjldg2udbgjd16o8tvga360eo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDgvX-ZtivWNdpBQEZ0gUNhNv0CAlzVvw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21274831280-3s08snkmjldg2udbgjd16o8tvga360eo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "21274831280-trvh1994v84lle4nhtbmgo87but4ghbf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "games.urmobi.bugs.antistress"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21274831280:android:090b47dff7dae0bf358e75",
+        "android_client_info": {
+          "package_name": "games.urmobi.crosswordoku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21274831280-3s08snkmjldg2udbgjd16o8tvga360eo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDgvX-ZtivWNdpBQEZ0gUNhNv0CAlzVvw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21274831280-3s08snkmjldg2udbgjd16o8tvga360eo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "21274831280-trvh1994v84lle4nhtbmgo87but4ghbf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "games.urmobi.bugs.antistress"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21274831280:android:f872998961fcc19a358e75",
+        "android_client_info": {
+          "package_name": "games.urmobi.meditation.antistress"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21274831280-3s08snkmjldg2udbgjd16o8tvga360eo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDgvX-ZtivWNdpBQEZ0gUNhNv0CAlzVvw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21274831280-3s08snkmjldg2udbgjd16o8tvga360eo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "21274831280-trvh1994v84lle4nhtbmgo87but4ghbf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "games.urmobi.bugs.antistress"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

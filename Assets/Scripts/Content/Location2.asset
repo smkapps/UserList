@@ -18,4 +18,4 @@ MonoBehaviour:
   circleSkinWithShapes: {fileID: 21300000, guid: d2f38660b5931ed4e9cbf38ebd3fbcea,
     type: 3}
   circleSkin: {fileID: 21300000, guid: ec2a5dd4f5b18fd489d15aa91f2b5dda, type: 3}
-  minutesOnPreviousStageToUnlock: 1.4
+  minutesOnPreviousStageToUnlock: 5

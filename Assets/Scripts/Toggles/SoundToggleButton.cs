@@ -6,11 +6,10 @@ public class SoundToggleButton : MonoBehaviour, IToggleButtonListener
 {
     public bool GetIsOnStateInitial()
     {
-        return GameProgress.Instance.SoundIsOn;
+        return false;
     }
 
     public void HandleClick(bool isOn)
     {
-        GameProgress.Instance.SoundIsOn = isOn;
     }
 }

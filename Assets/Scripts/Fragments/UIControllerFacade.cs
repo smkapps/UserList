@@ -17,6 +17,7 @@ public class UIControllerFacade : MonoSingleton<UIControllerFacade>
     public UIFragment CurrentScreen => uIScreenController.CurrentScreen;
     public UIFragment CurrentWindow => uIWindowController.CurrentWindow;
 
+    public bool AnyWindowOpen => CurrentWindow != null;
     //#if UNITY_EDITOR_WIN
     //    [MenuItem("Urmobi/Generate AddListeners")]
     //    public static void AddListeners()
@@ -35,35 +36,34 @@ public class UIControllerFacade : MonoSingleton<UIControllerFacade>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && touchLocker.activeSelf == false && loader.gameObject.activeSelf == false)
+        if (Input.GetKeyDown(KeyCode.Escape) && touchLocker.activeSelf == false && loader?.gameObject.activeSelf == false)
         {
             if (uIWindowController.OnBackClick()) // touchLocker is active only during transition between windows. So user must wait till animation is finished 
             {
                 return;
             }
-            uIScreenController.OnBackClick();
+            Application.Quit();
         }
     }
 
-
-    public UIFragmentName CurrentFragmentName
+    public void ShowTutorial()
     {
-        get
-        {
-            if (CurrentWindow) return (UIFragmentName) CurrentWindow.ID;
-            if (CurrentScreen) return (UIFragmentName)CurrentScreen.ID;
-            return UIFragmentName.Lobby;
-        }
+        uIWindowController.ShowUIFragment(UIFragmentName.Tutorial);
     }
 
     public void ShowUIScreen(UIFragmentName screenName, object data = null)
     {
-        uIScreenController.ShowUIFragment(screenName, data);
+        if (uIScreenController != null) uIScreenController.ShowUIFragment(screenName, data);
     }
 
     public void ShowUIWindow(UIFragmentName screenName, object data = null)
     {
         uIWindowController.ShowUIFragment(screenName, data);
+    }
+
+    public void ShowUIWindow(UIFragmentName screenName)
+    {
+        uIWindowController.ShowUIFragment(screenName);
     }
 
     public void AddUIWindowToQueue(UIFragmentName screenName, object data = null)
@@ -112,20 +112,8 @@ public class UIControllerFacade : MonoSingleton<UIControllerFacade>
 [System.Serializable]
 public enum UIFragmentName
 {
-    Game = 0,
-    Lobby = 1,
-    LevelComplete = 2,
-    Hut = 3,
-    Quest = 4,
-    DailyReward = 5,
-    Shop = 6,
-    Settings = 7,
-    HiddenWords =8,
-    Error = 9,
-    PurchaseSuccess =10,
-    QuestNext = 11,
-    Progress =12,
-    RateUs = 13,
-    NoMoreLevels = 14
+    StressPeak,
+    UnlockLocation,
+    Tutorial
 
 }

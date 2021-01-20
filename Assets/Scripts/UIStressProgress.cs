@@ -8,37 +8,40 @@ public class UIStressProgress : MonoBehaviour
 {
     private ProgressBarView progressBar;
     [SerializeField] private TextMeshProUGUI stressText;
-    private Hero hero;
+    private Stress stress;
 
     private void Awake()
     {
-        hero = FindObjectOfType<Hero>();
+        stress = FindObjectOfType<Stress>();
         progressBar = GetComponentInChildren<ProgressBarView>();
-        Hero.Stressed += OnHeroStressed;
+        Stress.StressChanged += OnStressChanged;
 
         SetInitialValues();
     }
 
     private void OnDestroy()
     {
-        Hero.Stressed -= OnHeroStressed;
+        Stress.StressChanged -= OnStressChanged;
     }
+
+    private void OnStressChanged(int stressValue)
+    {
+        SetTextStress(stress.StressValue);
+        progressBar.AnimateFill(stressValue, stress.StressMaxValue, 0.2f);
+    }
+
 
     private void SetInitialValues()
     {
-        progressBar.SetInitialValue(hero.stressValue, hero.stressMaxValue);
-        SetTextStress(new StressInfo(hero.stressValue, hero.stressMaxValue));
+        progressBar.SetInitialValue(stress.StressValue, stress.StressMaxValue);
+        SetTextStress(stress.StressValue);
     }
 
-    private void OnHeroStressed(StressInfo stressInfo)
-    {
-        SetTextStress(stressInfo);
-        progressBar.AnimateFill(stressInfo.currentValue, stressInfo.maxValue, 0.2f);
-    }
 
-    private void SetTextStress(StressInfo stressInfo)
+
+    private void SetTextStress(int stressValue)
     {
-        stressText.text = string.Format("{0}/{1}", stressInfo.currentValue, stressInfo.maxValue);
+        stressText.text = string.Format("{0}/{1}", stressValue, stress.StressMaxValue);
     }
 
 

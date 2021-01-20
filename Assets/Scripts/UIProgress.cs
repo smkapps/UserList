@@ -7,12 +7,11 @@ using System;
 
 public class UIProgress : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer backgrpound;
+ 
     [SerializeField] private Transform totalTimeHolder;
     [SerializeField] private TextMeshProUGUI totalTimeText;
     [SerializeField] private TextMeshProUGUI currentStageTimeText;
     [SerializeField] private Image nextLocationCircleSkin;
-
     private TimeProgress timeProgress;
 
     private void Awake()
@@ -20,7 +19,6 @@ public class UIProgress : MonoBehaviour
         timeProgress = FindObjectOfType<TimeProgress>();
         TimeProgress.NewLocationUnlocked += OnNewLocationUnlocked;
         SetNextLocationSkin();
-        SetLocationBG();
     }
 
     private void OnDestroy()
@@ -28,10 +26,9 @@ public class UIProgress : MonoBehaviour
         TimeProgress.NewLocationUnlocked -= OnNewLocationUnlocked;
     }
 
-    private void OnNewLocationUnlocked(int obj)
+    private void OnNewLocationUnlocked(int locationID)
     {
         SetNextLocationSkin();
-        SetLocationBG();
     }
 
     private void LateUpdate()
@@ -50,18 +47,14 @@ public class UIProgress : MonoBehaviour
             nextLocationCircleSkin.gameObject.SetActive(false);
             return;
         }
-            
         nextLocationCircleSkin.sprite = ContentProvider.Instance.GetNextCircleSkinSprite();
     }
 
-    private void SetLocationBG()
-    {
-        backgrpound.sprite = ContentProvider.Instance.GetCurrentPlayBGSprite();
-    }
+
 
     private void UpdateTotalTimeText()
     {
-        string timeValue = TimePattern(TimeSpan.FromSeconds(timeProgress.TotalTime)); 
+        string timeValue = TimePattern(TimeSpan.FromSeconds(timeProgress.TotalTime));
         if (totalTimeText.text.Equals(timeValue) == false) totalTimeText.text = timeValue;
     }
 
@@ -71,31 +64,11 @@ public class UIProgress : MonoBehaviour
         if (currentStageTimeText.text.Equals(timeValue) == false) currentStageTimeText.text = timeValue;
     }
 
-    //private void UpdateCurrentStageImageProgress()
-    //{
-    //    float progress = (float) (timeProgress.CurrentStageTime / timeProgress.CurrentStageTargetTime);
-    //    currentStageProgressImage.fillAmount = progress;
-    //}
-
     private string TimePattern(TimeSpan timespan)
     {
-        if (timespan.Hours > 0) return string.Format(@"{0:hh\:mm\:ss}", timespan);
+        if ((int)timespan.TotalHours > 0) return (int)timespan.TotalHours + timespan.ToString(@"\:mm\:ss"); 
         if (timespan.Minutes > 0) return string.Format(@"{0:mm\:ss}", timespan);
         return string.Format(@"{0:ss}", timespan);
     }
-
-    //private string SecondsToHoursAndMinutes(float seconds)
-    //{
-    //    int hours = TimeSpan.FromSeconds(seconds).Hours;
-    //    int minutes = TimeSpan.FromSeconds(seconds).Minutes;
-    //    return string.Format("{0}h {1}min", hours, minutes);
-    //}
-
-    //private string SecondsToMinutesAndSeconds(float seconds)
-    //{
-
-    //    int minutes = (int)TimeSpan.FromSeconds(seconds).TotalMinutes;
-    //    int sec = TimeSpan.FromSeconds(seconds).Seconds;
-    //    return string.Format("{0}min {1}sec", minutes, sec);
-    //}
 }
+

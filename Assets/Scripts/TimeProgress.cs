@@ -8,12 +8,15 @@ public class TimeProgress : MonoBehaviour
     [SerializeField] private GameObject locationsConfigGO;
     [SerializeField] private IUnlockLocationConfig locationsConfig;
     [SerializeField] private int mostRecentUnlockedLocationID;
-    
-    private bool paused;
-    private double currentStageTime;
-    public float TotalTime { get; private set; }
 
-    public static event System.Action<int> NewLocationUnlocked;
+    public bool AllLocationsUnlocked => mostRecentUnlockedLocationID >= locationsConfig.LastLocationID;
+    public int MostRecentUnlockedLocationID { get => mostRecentUnlockedLocationID; }
+
+    private bool paused => UIControllerFacade.Instance.AnyWindowOpen;
+    private double currentStageTime;
+    public double TotalTime { get; private set; }
+
+    public static event Action<int> NewLocationUnlocked;
 
     private void OnValidate()
     {
@@ -26,7 +29,15 @@ public class TimeProgress : MonoBehaviour
 
     private void Awake()
     {
+        InitializeSavedState();
         locationsConfig = locationsConfigGO.GetComponent<IUnlockLocationConfig>();
+    }
+
+    private void InitializeSavedState()
+    {
+        mostRecentUnlockedLocationID = GameProgress.Instance.MostRecentUnlockedLocationID;
+        currentStageTime = GameProgress.Instance.CurrentStageTime;
+        TotalTime = GameProgress.Instance.TotalTime;
     }
 
     public double CurrentStageTime
@@ -55,26 +66,48 @@ public class TimeProgress : MonoBehaviour
             return locationsConfig.GetTimeSpanToUnlockNextLocation(mostRecentUnlockedLocationID).TotalSeconds;
         }
     }   
-    
-    public bool AllLocationsUnlocked => mostRecentUnlockedLocationID >= locationsConfig.LastLocationID;
-
-    public int MostRecentUnlockedLocationID { get => mostRecentUnlockedLocationID; }
 
     private void Update()
     {
         if (paused) return;
         TotalTime += Time.deltaTime;
+        SaveStateIfTimeIntervalReached();
         if (AllLocationsUnlocked) return;
         currentStageTime += Time.deltaTime;
         if(currentStageTime >= CurrentStageTargetTime) UnlockNewLocation();
+    }
+
+    private float lastSavedTimeSinceGameStart;
+
+    private void SaveStateIfTimeIntervalReached()
+    {
+        if(Time.time - lastSavedTimeSinceGameStart > 5)
+        {
+            SaveState();
+            lastSavedTimeSinceGameStart = Time.time;
+        }
     }
 
     private void UnlockNewLocation()
     {
         mostRecentUnlockedLocationID++;
         currentStageTime = 0;
+        SaveState();
         NewLocationUnlocked?.Invoke(mostRecentUnlockedLocationID);
+        UIControllerFacade.Instance.AddUIWindowToQueue(UIFragmentName.UnlockLocation);
+       
+    }
 
+    private void OnApplicationFocus(bool focus)
+    {
+        if (!focus) SaveState();
+    }
+
+    private void SaveState()
+    {
+        GameProgress.Instance.TotalTime = TotalTime;
+        GameProgress.Instance.CurrentStageTime = currentStageTime;
+        GameProgress.Instance.MostRecentUnlockedLocationID = mostRecentUnlockedLocationID;
     }
 }
 

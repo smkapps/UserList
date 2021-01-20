@@ -5,33 +5,39 @@ using UnityEngine;
 
 public class ContentProvider : MonoSingleton<ContentProvider>, IUnlockLocationConfig
 {
-    private TimeProgress timeProgress;
-    
+    private TimeProgress timeProgress;    
     [SerializeField] private List<LocationAssets> locationsAssets;
-
     private int mostRecentUnlockedLocationID => timeProgress.MostRecentUnlockedLocationID;
     private LocationAssets currentPlayingLocationAsset => locationsAssets[currentPlayingLocationID];
-    private int currentPlayingLocationID => mostRecentUnlockedLocationID;
-
+    private int currentPlayingLocationID;
+    public int LastLocationID => locationsAssets.Count - 1;
 
     private void Awake()
     {
+        currentPlayingLocationID = GameProgress.Instance.CurrentPlayLocationID;
         timeProgress = FindObjectOfType<TimeProgress>();
-        //TimeProgress.NewLocationUnlocked += OnNewLocationUnlocked;
+        UIWindowLocationUnlocked.UnlockedLocationApplied += OnUnlockedLocationApplied;
+        LocationChanger.CurrentPlayLocationChanged += LocationChanger_CurrentPlayLocationChanged;
     }
 
-    //protected override void OnDestroy()
-    //{
-    //    base.OnDestroy();
-    //    TimeProgress.NewLocationUnlocked -= OnNewLocationUnlocked;
-    //}
 
-    //private void OnNewLocationUnlocked(int obj)
-    //{
-    //    currentPlayingLocationID = obj;
-    //}
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        UIWindowLocationUnlocked.UnlockedLocationApplied -= OnUnlockedLocationApplied;
+        LocationChanger.CurrentPlayLocationChanged -= LocationChanger_CurrentPlayLocationChanged;
+    }
 
-    public int LastLocationID => locationsAssets.Count - 1;
+    private void OnUnlockedLocationApplied()
+    {
+        currentPlayingLocationID = mostRecentUnlockedLocationID;
+        GameProgress.Instance.CurrentPlayLocationID = currentPlayingLocationID;
+    }
+
+    private void LocationChanger_CurrentPlayLocationChanged()
+    {
+        currentPlayingLocationID = GameProgress.Instance.CurrentPlayLocationID;
+    }
 
     public TimeSpan GetTimeSpanToUnlockNextLocation(int currentLocationId)
     {
@@ -47,14 +53,13 @@ public class ContentProvider : MonoSingleton<ContentProvider>, IUnlockLocationCo
 
     public Sprite GetNextCircleSkinSprite()
     {
-        if (timeProgress.AllLocationsUnlocked) return null;
+        if (timeProgress.AllLocationsUnlocked) throw new Exception("AllLocationsUnlocked Next Circle SkinSprite not available");
         return locationsAssets[mostRecentUnlockedLocationID + 1].CircleSkin;
     }
 
-    public Sprite GetNextCircleSkinWithShapesSprite()
+    public Sprite GetCurrentCircleSkinWithShapesSprite()
     {
-        if (timeProgress.AllLocationsUnlocked) return null;
-        return locationsAssets[mostRecentUnlockedLocationID + 1].CircleSkinWithShapes;
+        return locationsAssets[mostRecentUnlockedLocationID].CircleSkinWithShapes;
     }
 
     public Sprite GetCurrentPlayBGSprite()
@@ -62,7 +67,7 @@ public class ContentProvider : MonoSingleton<ContentProvider>, IUnlockLocationCo
         return currentPlayingLocationAsset.Background;
     }
 
-    public GameObject GetRandomDreamPrefab(Vector2 position)
+    public GameObject GetCurrentLocationRandomDreamPrefab(Vector2 position)
     {
         GameObject prefab = currentPlayingLocationAsset.ShapesList.GetRandomDream();
         return GetObjectDynamic(prefab, position);
@@ -79,8 +84,5 @@ public class ContentProvider : MonoSingleton<ContentProvider>, IUnlockLocationCo
         }
         return dynamicPools[prefab].GetObject(position);
     }
-
-
-
 
 }

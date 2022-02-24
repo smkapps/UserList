@@ -63,6 +63,7 @@ public class FirebaseEvents : MonoBehaviour
         RewardedAdShowing.AdOpen += RewardedAdShowing_AdOpen;
         RewardedAdShowing.AdWatched += RewardedAdShowing_AdWatched;
     }
+    
     private void OnDestroy()
     {
 
